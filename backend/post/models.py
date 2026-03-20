@@ -1,12 +1,16 @@
+# post/models.py
 from django.db import models
+from cloudinary.models import CloudinaryField # Isse import karein
 
-from django.contrib.auth.models import User
 class Post(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
-
-    title=models.CharField(max_length=200)
-    description=models.TextField(max_length=1000)
-    created_at=models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=255)
+    # FileField ki jagah CloudinaryField use karein aur resource_type='raw' force karein
+    file = CloudinaryField(
+        'file', 
+        resource_type='raw', 
+        folder='vault/documents/'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return self.name
