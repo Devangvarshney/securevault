@@ -30,9 +30,10 @@ else:
 print(f"DEBUG: CLOUD_NAME = {os.getenv('CLOUD_NAME')}")
 
 # 3. SECURITY SETTINGS
-SECRET_KEY = 'django-insecure-e)3n1@+#57gb(e1cw75!#y4*&tzezz1bvbp3z)m$b)yrr(8d#q'
-DEBUG = True
-ALLOWED_HOSTS = []
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
+DEBUG = os.environ.get("DEBUG") == "True"
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(",")
 
 # 4. APPLICATION DEFINITION
 INSTALLED_APPS = [
